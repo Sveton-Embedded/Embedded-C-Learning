@@ -48,13 +48,44 @@ void printMotor(Motor *m)
         case ERROR:
         printf("State : ERROR\n");
         break;
+
+        default:
+        printf("State : UNKNOWN\n");
+        break;
     }
 }
+    
+void UpdateMotorState(Motor *m)
+    {
+        if (m == NULL) 
+        {
+        return; 
+        }
+
+    if (m->temperature >= 100.0f) 
+
+    {
+        m->state = ERROR;
+    }
+
+    else if (m->voltage > 0.0f) 
+
+    {
+        m->state = RUNNING;
+    } 
+
+    else 
+    {
+        m->state = OFF;
+    }
+}
+
 
 int main(void)
 {
     
-    Motor motors[3];
+    Motor motors[MOTOR_COUNT];
+
 
     strcpy(motors[0].name, "Siemens24");
     motors[0].voltage = 400.0f;
@@ -62,14 +93,12 @@ int main(void)
     motors[0].temperature = 75.0f;
     motors[0].state = RUNNING;
 
-    
     strcpy(motors[1].name, "Bosch-X");
     motors[1].voltage = 12.0f;
     motors[1].current = 1.5f;
     motors[1].temperature = 36.6f;
     motors[1].state = OFF;
 
-   
     strcpy(motors[2].name, "Nidec-Pro");
     motors[2].voltage = 5.0f;
     motors[2].current = 0.8f;
@@ -79,6 +108,7 @@ int main(void)
     
     for (int i = 0; i < MOTOR_COUNT ; i++)
     {
+        UpdateMotorState(&motors[i]);
         printMotor(&motors[i]);
     }
 
