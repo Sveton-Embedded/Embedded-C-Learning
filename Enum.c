@@ -7,15 +7,22 @@ typedef float Voltage;
 typedef float Current;
 typedef float Temperature;
 
+typedef enum
+{
+    OFF,
+    STARTING,
+    RUNNING,
+    ERROR,
+}MotorState;
+
 typedef struct
 {
     char name[20];
     Voltage voltage;
     Current current;
     Temperature temperature;
-    bool motorStatus;
+    MotorState state;
 }Motor;
-
 
 void printMotor(Motor *m)
 {
@@ -23,15 +30,25 @@ void printMotor(Motor *m)
     printf("Voltage     : %.1f V\n", m->voltage);
     printf("Current     : %.1f A\n", m->current);
     printf("Temperature : %.1f C\n", m->temperature);
-    if(m->motorStatus)
+
+    switch(m->state)
     {
-        printf("Motor Status: ON\n");
+        case OFF:
+        printf("State : OFF\n");
+        break;
+
+        case STARTING:
+        printf("State : STARTING\n");
+        break;
+
+        case RUNNING:
+        printf("State : RUNNING\n");
+        break;
+
+        case ERROR:
+        printf("State : ERROR\n");
+        break;
     }
-    else
-    {
-        printf("Motor Status: OFF\n");
-    }
-    printf("---------------------\n"); 
 }
 
 int main(void)
@@ -43,21 +60,21 @@ int main(void)
     motors[0].voltage = 400.0f;
     motors[0].current = 22.0f;
     motors[0].temperature = 75.0f;
-    motors[0].motorStatus = true;
+    motors[0].state = RUNNING;
 
     
     strcpy(motors[1].name, "Bosch-X");
     motors[1].voltage = 12.0f;
     motors[1].current = 1.5f;
     motors[1].temperature = 36.6f;
-    motors[1].motorStatus = false;
+    motors[1].state = OFF;
 
    
     strcpy(motors[2].name, "Nidec-Pro");
     motors[2].voltage = 5.0f;
     motors[2].current = 0.8f;
     motors[2].temperature = 42.1f;
-    motors[2].motorStatus = true;
+    motors[2].state = STARTING;
 
     
     for (int i = 0; i < MOTOR_COUNT ; i++)
