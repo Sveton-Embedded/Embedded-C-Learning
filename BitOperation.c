@@ -4,7 +4,8 @@ int main (void)
 {
     unsigned char reg = 255;
 
-    reg = ~reg;
+    reg &= ~(1 << 0);
+    reg &= ~(1 << 2);
 
     printf("%u\n" , reg);
 
