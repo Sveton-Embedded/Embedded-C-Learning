@@ -2,11 +2,9 @@
 
 int main (void)
 {
-    unsigned char reg = 0;
+    unsigned char reg = 255;
 
-    reg |= (1 << 0);
-
-    reg |= (1 << 3);
+    reg = ~reg;
 
     printf("%u\n" , reg);
 
