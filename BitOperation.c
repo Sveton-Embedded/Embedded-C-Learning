@@ -2,12 +2,16 @@
 
 int main (void)
 {
-    unsigned char reg = 255;
+  unsigned char gpio = 0;
 
-    reg &= ~(1 << 0);
-    reg &= ~(1 << 2);
+  gpio |= (1 << 1);
+  gpio |= (1 << 5);
 
-    printf("%u\n" , reg);
+  gpio ^= (1 << 1);
 
-    return 0;
+  if(gpio & (1 << 5))
+
+  printf("%u\n", gpio);
+
+  return 0;
 }
