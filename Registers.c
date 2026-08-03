@@ -1,45 +1,29 @@
 #include <stdio.h>
 
-typedef char LED1;
-typedef char LED4;
-typedef char LED7;
+void setBit(unsigned char *reg, int bit)
+{
+    *reg |= (1 << bit);
+}
+
+void clearBit(unsigned char *reg, int bit)
+{
+    *reg &= ~(1 << bit);
+}
+
+void toggleBit(unsigned char *reg, int bit)
+{
+    *reg ^= (1 << bit);
+}
 
 int main(void)
 {
-    unsigned char GPIO = 0;
-    
-    GPIO |= (1 <<  1);
+    unsigned char GPIO = 155;
 
-    if(GPIO &(1 << 1))
-    {
-        printf("LED1 ON\n");
-    }
-    else
-    {
-        printf("LED1 OFF\n");
-    }
+    setBit(&GPIO , 3 );
+    clearBit(&GPIO , 5);
+    toggleBit(&GPIO , 4);
 
-    GPIO |= (1 <<  4);
+    printf("%d\n" , GPIO);
 
-    if(GPIO &(1 << 1))
-    {
-        printf("LED4 ON\n");
-    }
-    else
-    {
-        printf("LED4 OFF\n");
-    }
-
-    GPIO |= (1 <<  7);
-
-    if(GPIO &(1 << 1))
-    {
-        printf("LED7 ON\n");
-    }
-    else
-    {
-        printf("LED7 OFF\n");
-    }
-
- return 0;
+    return 0;
 }
