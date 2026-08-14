@@ -32,6 +32,25 @@ void printMotor(Motor *m)
     }
 }
 
+static void checkTemperature(const Motor *m)
+    {
+        printf("\nTemperature: %.1f C\n", m->temperature);
+        if(m->temperature >= 100.0f)
+        {
+            printf("Temperature Status : CRITICAL\n\n");
+        }
+
+        else if(m->temperature >= 80.0f)
+        {
+            printf("Temperature Status : WARNING\n\n");
+        }
+
+        else
+        {
+            printf("Temperature Status : NORMAL\n\n");
+        }
+    }
+
 void UpdateMotorState(Motor *m)
     {
         if (m == NULL) 
@@ -55,4 +74,8 @@ void UpdateMotorState(Motor *m)
     {
         m->state = OFF;
     }
+
+    checkTemperature(m);
+
 }
+
