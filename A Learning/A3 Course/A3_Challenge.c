@@ -1,19 +1,26 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-int* getDanglingPointer(void)
+
+int* getHeapPointer(void)
 {
-    int danglingValue = 42;
-    return &danglingValue;  
+    int *heapValue = malloc(sizeof(int));
+
+    if (heapValue == NULL) {
+        printf("Malloc failed!\n");
+        return NULL;
+    }
+
+    *heapValue = 42;
+    return heapValue;
 }
 
 int main(void)
-
 {
-    int *ptr = getDanglingPointer();
-    printf("Dangling value: %d\n", *ptr);   
+int *ptr = getHeapPointer();
+printf("Heap value: %d\n", *ptr);
 
-    
-    return 0;
+free(ptr);  
 }
 
 
