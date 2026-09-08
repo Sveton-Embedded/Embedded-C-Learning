@@ -20,7 +20,9 @@ int main(void)
 int *ptr = getHeapPointer();
 printf("Heap value: %d\n", *ptr);
 
-free(ptr);  
+free(ptr); 
+
+return 0; 
 }
 
 
