@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-int* getStackPointer(void)
+int* getHeapArray(void)
 {
     int *arr = malloc(5 * sizeof(int));
 
@@ -12,14 +11,21 @@ int* getStackPointer(void)
         return NULL;
     }
 
-    *arr = 42;
-    return arr;
+    return arr;   
 }
 
 int main(void)
 {
 
-int *arr = getStackPointer();
+
+    int stackBuffer[100];
+
+    int *arr = getHeapArray();
+
+    if (arr == NULL) 
+    {
+        return 1;   
+    }
 
     for (int i = 0; i < 5; i++)
     {
@@ -34,4 +40,5 @@ int *arr = getStackPointer();
     free(arr);
     arr = NULL;
 
+    return 0;
 }
