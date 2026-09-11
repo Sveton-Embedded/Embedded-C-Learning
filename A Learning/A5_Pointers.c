@@ -12,6 +12,14 @@ void allocate_buffer(int **out, int size)
     }
 }
 
+void swap_pointers(int **a, int **b)
+{
+    int *temp = *a;
+    *a = *b;
+    *b = *temp;
+
+}
+
 int main(void)
 {
     int value = 10;
