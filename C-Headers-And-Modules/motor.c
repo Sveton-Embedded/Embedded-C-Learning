@@ -1,8 +1,12 @@
 #include <stdio.h>
 #include "motor.h"
+#include <assert.h>
 
 void printMotor(Motor *m)
 {
+
+    assert(m != NULL);
+
     printf("Name        : %s\n", m->name);
     printf("Voltage     : %.1f V\n", m->voltage);
     printf("Current     : %.1f A\n", m->current);

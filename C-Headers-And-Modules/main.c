@@ -32,7 +32,6 @@ int main(void)
         printMotor(&motors[i]);
     }
 
-    
 
     return 0;
 }
