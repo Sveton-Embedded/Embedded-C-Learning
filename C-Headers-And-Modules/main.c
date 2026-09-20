@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdio.h>
 #include "motor.h"
 
 int main(void)
@@ -15,6 +16,13 @@ int main(void)
     motors[0].temperature = 75.0f;
     motors[0].state = RUNNING;
 
+    char infoBuffer[50];
+    formatMotorInfo(&motors[0], infoBuffer, sizeof(infoBuffer));
+    printf("%s\n", infoBuffer);
+
+
+    
+
     
     strncpy(motors[1].name, "Bosch-X", sizeof(motors[1].name) - 1);
     motors[1].name[sizeof(motors[1].name) - 1] = '\0';
@@ -27,6 +35,7 @@ int main(void)
 
     strncpy(motors[2].name, "Nidec-Pro", sizeof(motors[2].name) - 1);
     motors[2].name[sizeof(motors[2].name) - 1] = '\0';
+
     motors[2].voltage = 5.0f;
     motors[2].current = 0.8f;
     motors[2].temperature = 42.1f;

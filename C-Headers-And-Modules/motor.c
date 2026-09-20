@@ -83,3 +83,7 @@ void UpdateMotorState(Motor *m)
 
 }
 
+void formatMotorInfo(Motor *m , char *buffer, size_t bufferSize)
+{
+    snprintf(buffer, bufferSize, "Motor: %s, V=%.2f", m->name, m->voltage);
+}

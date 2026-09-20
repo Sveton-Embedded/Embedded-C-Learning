@@ -26,5 +26,6 @@ typedef struct
 
 void printMotor(Motor *m);
 void UpdateMotorState(Motor *m);
+void formatMotorInfo(Motor *m , char *buffer, size_t bufferSize);
 
 #endif
