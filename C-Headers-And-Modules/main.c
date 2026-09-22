@@ -20,16 +20,13 @@ int main(void)
     formatMotorInfo(&motors[0], infoBuffer, sizeof(infoBuffer));
     printf("%s\n", infoBuffer);
 
-
-    
-
     
     strncpy(motors[1].name, "Bosch-X", sizeof(motors[1].name) - 1);
     motors[1].name[sizeof(motors[1].name) - 1] = '\0';
 
     motors[1].voltage = 12.0f;
     motors[1].current = 1.5f;
-    motors[1].temperature = 36.6f;
+    motors[1].temperature = 80.6f;
     motors[1].state = OFF;
 
 
@@ -38,15 +35,21 @@ int main(void)
 
     motors[2].voltage = 5.0f;
     motors[2].current = 0.8f;
-    motors[2].temperature = 42.1f;
+    motors[2].temperature = 100.1f;
     motors[2].state = STARTING;
-
     
     for (int i = 0; i < MOTOR_COUNT ; i++)
+{
+    Status result = UpdateMotorState(&motors[i]);
+
+    if (result != STATUS_OK)
     {
-        UpdateMotorState(&motors[i]);
-        printMotor(&motors[i]);
+        printf("Error updating motor %d!\n", i);
+        continue;   // пропускаем печать этого мотора, раз с ним что-то не так
     }
+
+    printMotor(&motors[i]);
+}
 
 
     return 0;

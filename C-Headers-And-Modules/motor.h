@@ -6,6 +6,13 @@ typedef float Voltage;
 typedef float Current;
 typedef float Temperature;
 
+typedef enum {
+    STATUS_OK = 0,
+    STATUS_ERROR_NULL_PTR,
+    STATUS_ERROR_TIMEOUT,
+    STATUS_ERROR_INVALID_PARAM
+} Status;
+
 typedef enum
 {
     OFF,
@@ -25,7 +32,7 @@ typedef struct
 
 
 void printMotor(Motor *m);
-void UpdateMotorState(Motor *m);
+Status UpdateMotorState(Motor *m);
 void formatMotorInfo(Motor *m , char *buffer, size_t bufferSize);
 
 #endif

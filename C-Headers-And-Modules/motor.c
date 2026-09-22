@@ -54,12 +54,13 @@ static void checkTemperature(const Motor *m)
             printf("Temperature Status : NORMAL\n\n");
         }
     }
+    
+    Status UpdateMotorState(Motor *m)
 
-void UpdateMotorState(Motor *m)
     {
         if (m == NULL) 
         {
-        return; 
+        return STATUS_ERROR_NULL_PTR; 
         }
 
     if (m->temperature >= 100.0f) 
@@ -80,6 +81,8 @@ void UpdateMotorState(Motor *m)
     }
 
     checkTemperature(m);
+
+    return STATUS_OK;
 
 }
 
