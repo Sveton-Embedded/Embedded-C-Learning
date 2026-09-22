@@ -45,10 +45,10 @@ int main(void)
     char cmd1[] = "SET_VOLTAGE 12.5";
     parseCommand(&m, cmd1);
 
-    char cmd2[] = "SET_VOLTAGE";   // без значения
+    char cmd2[] = "SET_VOLTAGE";   
     parseCommand(&m, cmd2);
 
-    char cmd3[] = "UNKNOWN_CMD 5";   // неизвестная команда
+    char cmd3[] = "UNKNOWN_CMD 5";   
     parseCommand(&m, cmd3);
 
     return 0;
