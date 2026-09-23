@@ -34,5 +34,6 @@ typedef struct
 void printMotor(Motor *m);
 Status UpdateMotorState(Motor *m);
 void formatMotorInfo(Motor *m , char *buffer, size_t bufferSize);
+Status setMotorVoltage(Motor *m, float voltage);
 
 #endif

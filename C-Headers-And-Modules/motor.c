@@ -90,3 +90,19 @@ void formatMotorInfo(Motor *m , char *buffer, size_t bufferSize)
 {
     snprintf(buffer, bufferSize, "Motor: %s, V=%.2f", m->name, m->voltage);
 }
+
+Status setMotorVoltage(Motor *m, float voltage)
+{
+    if (m == NULL)
+    {
+        return STATUS_ERROR_NULL_PTR;
+    }
+
+    if (voltage < 0.0f || voltage > 24.0f)
+    {
+        return STATUS_ERROR_INVALID_PARAM;
+    }
+
+    m->voltage = voltage;
+    return STATUS_OK;
+}

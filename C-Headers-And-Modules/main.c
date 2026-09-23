@@ -45,10 +45,68 @@ int main(void)
     if (result != STATUS_OK)
     {
         printf("Error updating motor %d!\n", i);
-        continue;   // пропускаем печать этого мотора, раз с ним что-то не так
+        continue;  
     }
 
     printMotor(&motors[i]);
+}
+
+printf("\n--- Testing setMotorVoltage ---\n");
+
+Status testResult;
+
+
+testResult = setMotorVoltage(&motors[0], 12.0f);
+switch (testResult)
+{
+    case STATUS_OK:
+        printf("Test 1 (valid value): OK, voltage = %.1f\n", motors[0].voltage);
+        break;
+    case STATUS_ERROR_NULL_PTR:
+        printf("Test 1: Error - NULL pointer\n");
+        break;
+    case STATUS_ERROR_INVALID_PARAM:
+        printf("Test 1: Error - invalid parameter\n");
+        break;
+    default:
+        printf("Test 1: Unknown error\n");
+        break;
+}
+
+
+testResult = setMotorVoltage(NULL, 12.0f);
+switch (testResult)
+{
+    case STATUS_OK:
+        printf("Test 2 (NULL pointer): OK\n");
+        break;
+    case STATUS_ERROR_NULL_PTR:
+        printf("Test 2: Error - NULL pointer, as expected\n");
+        break;
+    case STATUS_ERROR_INVALID_PARAM:
+        printf("Test 2: Error - invalid parameter\n");
+        break;
+    default:
+        printf("Test 2: Unknown error\n");
+        break;
+}
+
+
+testResult = setMotorVoltage(&motors[0], 50.0f);
+switch (testResult)
+{
+    case STATUS_OK:
+        printf("Test 3 (out of range): OK\n");
+        break;
+    case STATUS_ERROR_NULL_PTR:
+        printf("Test 3: Error - NULL pointer\n");
+        break;
+    case STATUS_ERROR_INVALID_PARAM:
+        printf("Test 3: Error - invalid parameter, as expected\n");
+        break;
+    default:
+        printf("Test 3: Unknown error\n");
+        break;
 }
 
 
